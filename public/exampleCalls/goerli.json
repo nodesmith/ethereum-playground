@@ -9,46 +9,6 @@
   },
   {  
      "jsonrpc":"2.0",
-     "method":"eth_accounts",
-     "params":[  
-
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_call",
-     "params":[  
-        {  
-           "data":"ENTER_DATA",
-           "to":"ENTER_TO_ADDRESS"
-        },
-        "latest"
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_compileSolidity",
-     "params":[  
-        "contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }"
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_estimateGas",
-     "params":[  
-        {  
-          "data":"ENTER_DATA",
-          "to":"ENTER_TO_ADDRESS"
-        },
-        "latest"
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
      "method":"eth_gasPrice",
      "params":[  
 
@@ -59,8 +19,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getBalance",
      "params":[  
-        "ENTER_ADDRESS",
-        "ENTER_BLOCK_NUMBER"
+        "0xe0a2bd4258d2768837baa26a28fe71dc079f84c7",
+        "latest"
      ],
      "id":1
   },
@@ -68,7 +28,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getBlockByHash",
      "params":[  
-        "ENTER_BLOCK_HASH"
+        "0x65e789144a19b9e9d9eeecb5611677be85a88bb7899281760dc64a41aa4ac723",
+        true
      ],
      "id":1
   },
@@ -76,7 +37,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getBlockByNumber",
      "params":[  
-        "ENTER_BLOCK_NUMBER"
+        "0x552A1",
+        true
      ],
      "id":1
   },
@@ -84,7 +46,7 @@
      "jsonrpc":"2.0",
      "method":"eth_getBlockTransactionCountByHash",
      "params":[  
-        "ENTER_BLOCK_HASH"
+        "0x65e789144a19b9e9d9eeecb5611677be85a88bb7899281760dc64a41aa4ac723"
      ],
      "id":1
   },
@@ -92,7 +54,7 @@
      "jsonrpc":"2.0",
      "method":"eth_getBlockTransactionCountByNumber",
      "params":[  
-        "ENTER_BLOCK_NUMBER"
+        "0x552A1"
      ],
      "id":1
   },
@@ -100,16 +62,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getCode",
      "params":[  
-        "ENTER_ADDRESS",
-        "ENTER_BLOCK_NUMBER"
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_getCompilers",
-     "params":[  
-
+        "0x112234455C3a32FD11230C42E7Bccd4A84e02010",
+        "latest"
      ],
      "id":1
   },
@@ -118,9 +72,9 @@
      "method":"eth_getLogs",
      "params":[  
         {  
-           "address":"ENTER_CONTRACT_ADDRESS",
-           "fromBlock":"ENTER_FROM_BLOCK_NUMBER",
-           "toBlock":"ENTER_TO_BLOCK_NUMBER"
+           "address":"0x112234455C3a32FD11230C42E7Bccd4A84e02010",
+           "fromBlock":"0",
+           "toBlock":"latest"
         }
      ],
      "id":1
@@ -129,9 +83,9 @@
      "jsonrpc":"2.0",
      "method":"eth_getStorageAt",
      "params":[  
-        "ENTER_CONTRACT_ADDRESS",
-        "ENTER_FROM_BLOCK_NUMBER",
-        "ENTER_TO_BLOCK_NUMBER"
+        "0x112234455C3a32FD11230C42E7Bccd4A84e02010",
+        "0x0",
+        "latest"
      ],
      "id":1
   },
@@ -139,8 +93,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getTransactionByBlockHashAndIndex",
      "params":[  
-        "ENTER_BLOCK_HASH",
-        "ENTER_INDEX"
+        "0xd67a43bdc5084b1913c0dc0a10f6baeac4f48c17608143bd5dd8eb2a32f3a3a2",
+        "0x0"
      ],
      "id":1
   },
@@ -148,8 +102,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getTransactionByBlockNumberAndIndex",
      "params":[  
-        "ENTER_BLOCK_NUMBER",
-        "ENTER_INDEX"
+        "0x5325F",
+        "0x0"
      ],
      "id":1
   },
@@ -157,7 +111,7 @@
      "jsonrpc":"2.0",
      "method":"eth_getTransactionByHash",
      "params":[  
-        "ENTER_TRANSACTION_HASH"
+        "0xb740530e65c73f1e51be57ec17f981f9388504afd68f0dcbb587fb1f0f35d02b"
      ],
      "id":1
   },
@@ -165,8 +119,8 @@
      "jsonrpc":"2.0",
      "method":"eth_getTransactionCount",
      "params":[  
-        "ENTER_ADDRESS",
-        "ENTER_BLOCK_NUMBER"
+        "0xe0a2bd4258d2768837baa26a28fe71dc079f84c7",
+        "latest"
      ],
      "id":1
   },
@@ -174,7 +128,7 @@
      "jsonrpc":"2.0",
      "method":"eth_getTransactionReceipt",
      "params":[  
-        "ENTER_TRANSACTION_HASH"
+        "0xb740530e65c73f1e51be57ec17f981f9388504afd68f0dcbb587fb1f0f35d02b"
      ],
      "id":1
   },
@@ -199,23 +153,6 @@
      "method":"eth_protocolVersion",
      "params":[  
 
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_sendRawTransaction",
-     "params":[  
-        "ENTER_RAW_TRANSACTION_DATA"
-     ],
-     "id":1
-  },
-  {  
-     "jsonrpc":"2.0",
-     "method":"eth_submitHashrate",
-     "params":[  
-        "0x0000000000000000000000000000000000000000000000000000000000500000",
-        "0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c"
      ],
      "id":1
   },
@@ -258,5 +195,37 @@
 
      ],
      "id":1
+  },
+  {  
+    "jsonrpc":"2.0",
+    "method":"web3_clientVersion",
+    "params":[  
+
+    ],
+    "id":1
+  },
+  {  
+     "jsonrpc":"2.0",
+     "method":"web3_sha3",
+     "params":[  
+        "0x68656c6c6f20776f726c64"
+     ],
+     "id":1
+  },
+  {  
+    "jsonrpc":"2.0",
+    "method":"eth_coinbase",
+    "params":[  
+
+    ],
+    "id":1
+  },
+  {  
+    "jsonrpc":"2.0",
+    "method":"eth_accounts",
+    "params":[  
+
+    ],
+    "id":1
   }
 ]
