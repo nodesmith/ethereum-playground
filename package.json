@@ -32,7 +32,7 @@
     "typescript": "^2.8.3",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.4",
+    "webpack-dev-server": "^3.1.11",
     "yamljs": "^0.3.0"
   },
   "dependencies": {

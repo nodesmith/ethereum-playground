@@ -61,10 +61,10 @@ class App extends React.Component<Props, State> {
     this.props.history.replace(`/${network}/${example}`);
   }
 
-  getMainComponent = (currentNetwork: string, currentRPCMethod: string, isSendingRequest: boolean, userRequestPayload?: string) => {
+  getMainComponent = (currentNetwork: string, currentRPCMethod: string) => {
     const { classes, appState } = this.props;
 
-    const { sendQuery, requestResponse, networkExamplesMap, setUserRequestPayload } = appState!;
+    const { sendQuery, requestResponse, isSendingRequest, networkExamplesMap, userRequestPayload, setUserRequestPayload } = appState!;
 
     const startingRequest = this.props.appState!.networkExamplesMap[currentNetwork][currentRPCMethod];
     const formattedStartingRequest = JSON.stringify(JSON.parse(startingRequest), null, 2);
@@ -114,15 +114,15 @@ class App extends React.Component<Props, State> {
       return (<LoadingIndicator isLoading/>);
     }
 
+    console.debug(`Request being sent: ${this.props.appState!.isSendingRequest}`);
+    console.debug(`User request string: ${this.props.appState!.userRequestPayload}`);
     return (
       <Switch>
         <Route key="content" path={'/:network/:rpcMethod' } render={(props) => {
           const currentNetwork = props.match.params.network;
           const currentRPCMethod = props.match.params.rpcMethod;
-          const isSendingRequest = this.props.appState!.isSendingRequest;
-          const userRequestPayload = this.props.appState!.userRequestPayload;
 
-          return this.getMainComponent(currentNetwork, currentRPCMethod, isSendingRequest, userRequestPayload);
+          return this.getMainComponent(currentNetwork, currentRPCMethod);
         }} />
 
         <Route key="redirect" >
