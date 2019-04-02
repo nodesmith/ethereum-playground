@@ -36,6 +36,15 @@ export default class AppState {
     this.isLoading = isLoading;
   }
 
+  /**
+   * First we populate the request payload with an example, but as the user starts interacting
+   * with the console, switch to using this store variable, so their changes persist between re-renders.
+   */
+  @observable public userRequestPayload?: string;
+  @action public setUserRequestPayload = (userRequestPayload?: string) => {
+    this.userRequestPayload = userRequestPayload;
+  }
+
   @observable public networkExamplesMap: NetworkExamplesMap;
   @action private setNetworkExamplesMap = (examples: NetworkExamplesMap) => {
     this.networkExamplesMap = examples;

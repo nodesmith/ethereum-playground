@@ -15,10 +15,10 @@ const styles: StyleRulesCallback = (theme: NodesmithTheme) => ({
   }
 });
 
-export type DropdownPair = ValueType<{
+export type DropdownPair = {
   value: string;
   label: string;
-}>;
+};
 
 interface SingleSelectDropdownProps {
   id: string;
@@ -64,7 +64,7 @@ class SingleSelectDropdown extends React.Component<Props> {
           defaultValue={defaultValue}
           options={options}
           styles={customStyles}
-          onChange={(event: DropdownPair) => { onChange(event); }}
+          onChange={(event: ValueType<{ value: string; label: string; }>) => { onChange(event as DropdownPair); }}
         />
       </div>
     );

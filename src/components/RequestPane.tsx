@@ -10,15 +10,11 @@ import 'brace/mode/json';
 import 'brace/theme/github';
 
 export interface RequestPaneProps {
-  startingRequest: string;
+  sampleRequest: string;
+  userRequestPayload?: string;
+  setUserRequestPayload: (requestBody?: string) => void;
   sendQuery: (requestBody: string) => void;
   isSendingRequest: boolean;
-}
-
-type Props = RequestPaneProps & WithStyles<'root' | 'play' | 'fabProgress'>;
-
-interface RequestPaneState {
-  currentRequest: string;
 }
 
 const styles: StyleRulesCallback = (theme: NodesmithTheme) => ({
@@ -41,28 +37,19 @@ const styles: StyleRulesCallback = (theme: NodesmithTheme) => ({
   },
 });
 
+type Props = RequestPaneProps & WithStyles<typeof styles>;
+
 /**
  * Shows an editable JSON text pane that allows a user to enter a new JSON RPC
  * method. Component also contains the play button that a user clicks to send
  * the method on to the Nodesmith service.
  */
-class RequestPane extends React.Component<Props, RequestPaneState> {
-  constructor(props: Props, context?: any) {
-    super(props, context);
-    this.state = Object.assign({}, {
-      currentRequest: props.startingRequest,
-    });
-  }
-
-  componentWillReceiveProps(props: Props) {
-    this.state = Object.assign({}, {
-      currentRequest: props.startingRequest,
-    });
-  }
-
+class RequestPane extends React.Component<Props> {
   requestBodyValid = (): boolean => {
     try {
-      JSON.parse(this.state.currentRequest);
+      if (this.props.userRequestPayload) {
+        JSON.parse(this.props.userRequestPayload);
+      }
     } catch {
       // JSON parsing error
       return false;
@@ -71,12 +58,16 @@ class RequestPane extends React.Component<Props, RequestPaneState> {
     return true;
   }
 
-  onRequestEdit = (event: any) => {
-    this.setState({ currentRequest: event });
+  onPlayButton = () => {
+    if (this.props.userRequestPayload) {
+      this.props.sendQuery(this.props.userRequestPayload);
+    } else {
+      this.props.sendQuery(this.props.sampleRequest);
+    }
   }
 
   render() {
-    const { classes, sendQuery, isSendingRequest } = this.props;
+    const { classes, isSendingRequest, sampleRequest, userRequestPayload, setUserRequestPayload } = this.props;
 
     const requestValid = this.requestBodyValid();
     const buttonElement = (
@@ -85,11 +76,13 @@ class RequestPane extends React.Component<Props, RequestPaneState> {
         color="primary"
         disableRipple
         disabled={!requestValid}
-        onClick={() => { sendQuery(this.state.currentRequest); }}
+        onClick={this.onPlayButton}
       >
         <PlayArrow fontSize="large"  />
       </Button>
     );
+
+    const requestBody = (!!userRequestPayload) ? userRequestPayload : sampleRequest;
 
     return [
       <div className={classes.root} key="request_body_input">
@@ -100,12 +93,12 @@ class RequestPane extends React.Component<Props, RequestPaneState> {
           width="100%"
           height="100%"
           name="requestPane"
-          onChange={this.onRequestEdit}
+          onChange={setUserRequestPayload}
           fontSize={14}
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={false}
-          value={this.state.currentRequest}
+          value={requestBody}
           setOptions={{
             enableBasicAutocompletion: false,
             enableLiveAutocompletion: false,

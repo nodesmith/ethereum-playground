@@ -12,14 +12,14 @@ export interface ResponsePaneProps {
   requestResponse: string;
 }
 
-type Props = ResponsePaneProps & WithStyles<'root'>;
-
 const styles: StyleRulesCallback = (theme: NodesmithTheme) => ({
   root: {
     height: '100%',
     overflowX: 'auto',
   },
 });
+
+type Props = ResponsePaneProps & WithStyles<typeof styles>;
 
 /**
  * Shows a read only JSON blob with the response from the Nodesmith service.

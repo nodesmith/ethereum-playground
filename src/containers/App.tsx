@@ -56,14 +56,15 @@ class App extends React.Component<Props, State> {
   }
 
   updatePath = (network: string, example: string) => {
+    this.props.appState!.setUserRequestPayload(undefined);
     this.props.appState!.changeRequestResponse('');
     this.props.history.replace(`/${network}/${example}`);
   }
 
-  getMainComponent = (currentNetwork: string, currentRPCMethod: string) => {
+  getMainComponent = (currentNetwork: string, currentRPCMethod: string, isSendingRequest: boolean, userRequestPayload?: string) => {
     const { classes, appState } = this.props;
 
-    const { sendQuery, requestResponse, isSendingRequest, networkExamplesMap } = appState!;
+    const { sendQuery, requestResponse, networkExamplesMap, setUserRequestPayload } = appState!;
 
     const startingRequest = this.props.appState!.networkExamplesMap[currentNetwork][currentRPCMethod];
     const formattedStartingRequest = JSON.stringify(JSON.parse(startingRequest), null, 2);
@@ -84,7 +85,7 @@ class App extends React.Component<Props, State> {
         </Grid>
         <Grid item xs={12} container direction="row" className={classes.headers}>
           <Grid item xs={6}>
-            <Typography variant="subtitle1">Request Payload: </Typography>
+            <Typography variant="subtitle1">Request Payload:</Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">Response:</Typography>
@@ -93,9 +94,11 @@ class App extends React.Component<Props, State> {
         <Grid item xs={12} container direction="row" className={classes.main}>
           <Grid item xs={6}className={classes.leftPane}>
             <RequestPane
-              startingRequest={formattedStartingRequest}
+              sampleRequest={formattedStartingRequest}
               sendQuery={(requestBody: string) => { sendQuery(requestBody, currentNetwork); }}
               isSendingRequest={isSendingRequest}
+              userRequestPayload={userRequestPayload}
+              setUserRequestPayload={setUserRequestPayload}
             />
           </Grid>
           <Grid item xs={6}>
@@ -111,14 +114,15 @@ class App extends React.Component<Props, State> {
       return (<LoadingIndicator isLoading/>);
     }
 
-    console.log(this.props.appState!.isSendingRequest);
     return (
       <Switch>
         <Route key="content" path={'/:network/:rpcMethod' } render={(props) => {
           const currentNetwork = props.match.params.network;
           const currentRPCMethod = props.match.params.rpcMethod;
+          const isSendingRequest = this.props.appState!.isSendingRequest;
+          const userRequestPayload = this.props.appState!.userRequestPayload;
 
-          return this.getMainComponent(currentNetwork, currentRPCMethod);
+          return this.getMainComponent(currentNetwork, currentRPCMethod, isSendingRequest, userRequestPayload);
         }} />
 
         <Route key="redirect" >
