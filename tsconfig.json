@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "target": "es6",
+    "allowJs": false,
+    "moduleResolution": "node",
+    "lib": ["es5", "es6", "dom", "es2017.object", "esnext.asynciterable"],
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "noErrorTruncation": true, // This can be turned back off
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+  },
+  "include": [
+    "./types/**/*.d.ts",
+    "./gen-src/**/*.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./test/**/*.ts",
+    "./scripts/**/*.ts"
+  ]
+}
